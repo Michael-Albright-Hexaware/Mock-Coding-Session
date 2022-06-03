@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Employee {
@@ -28,6 +29,54 @@ public class Employee {
         this.salary = salary;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public int getYearOfJoining() {
+        return yearOfJoining;
+    }
+
+    public void setYearOfJoining(int yearOfJoining) {
+        this.yearOfJoining = yearOfJoining;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
     public String getName() {
         return name;
     }
@@ -41,7 +90,6 @@ public class Employee {
                     .collect(Collectors.groupingBy(e -> e.department, Collectors.counting()));
         }
 
-
         /*
         DID NOT FINISH FINAL QUESTION IN TIME
 
@@ -51,6 +99,23 @@ public class Employee {
         }
 
          */
+
+    //With extra time
+    public static void namesByDepartment(List<Employee> employees) {
+        employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment))
+                .entrySet()
+                .stream()
+                .forEach(e -> {
+                    System.out.println(e.getKey());
+                    e.getValue()
+                            .stream()
+                            .forEach(i -> {
+                                System.out.println(i.getName());
+                            });
+                    System.out.println();
+                });
+    }
 
     public static void main(String[] args) {
         List<Employee> employees = new ArrayList<>();
@@ -73,5 +138,8 @@ public class Employee {
         employees.add(new Employee(277, "Anuj", 31, "Male", "Product Development", 2012, 35700.0));
 
         System.out.println(getByDepartment(employees));
+        System.out.println();
+
+        namesByDepartment(employees);
     }
 }
